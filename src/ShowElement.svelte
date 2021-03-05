@@ -121,6 +121,9 @@
   ul {
     margin-block: unset;
   }
+  li {
+    color: var(--color-text);
+  }
   .Alle,
   .undefined {
     color: #000;
