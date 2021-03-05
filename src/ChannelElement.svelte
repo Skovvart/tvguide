@@ -64,6 +64,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5em;
+    padding: 0.5em;
   }
   button {
     color: #fff;
