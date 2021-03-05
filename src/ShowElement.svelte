@@ -116,6 +116,7 @@
   p {
     padding: 0.5em 1em;
     margin-block: unset;
+    color: var(--color-text);
   }
   ul {
     margin-block: unset;
