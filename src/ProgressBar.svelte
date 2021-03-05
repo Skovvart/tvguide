@@ -10,11 +10,11 @@
 <style>
   .wrapper {
     width: 100%;
-    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    background-image: var(--gradient-dark);
   }
   .bar {
-    background-color: #4b7599;
-    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    background-color: var(--color-primary);
+    background-image: var(--gradient-dark);
     transition: width ease-in-out 0.5s;
     height: 10px;
   }

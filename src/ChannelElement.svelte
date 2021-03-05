@@ -24,11 +24,15 @@
   };
 </script>
 
-<div>
-  <img src={channel.svgLogo || channel.logo} alt={channel.title} title={channel.title} width="100" height="46" />
-  <button on:click={shiftLeft} disabled={firstUserChannel}>&lt;</button>
-  <button on:click={shiftRight} disabled={lastUserChannel}>&gt;</button>
-  <button on:click={() => ($userChannels = $userChannels.filter(c => c !== channel.id))}>X</button>
+<div class="channel">
+  <div class="header">
+    <img src={channel.svgLogo || channel.logo} alt={channel.title} title={channel.title} width="100" height="46" />
+    <div class="actions">
+      <button on:click={shiftLeft} disabled={firstUserChannel} title="Flyt til venstre" aria-label="Flyt til venstre">&lt;</button>
+      <button on:click={shiftRight} disabled={lastUserChannel} title="Flyt til højre" aria-label="Flyt til højre">&gt;</button>
+      <button on:click={() => ($userChannels = $userChannels.filter(c => c !== channel.id))} title="Fjern kanal" aria-label="Fjern kanal">X</button>
+    </div>
+  </div>
   <div class="shows">
     {#if shows?.length}
       {#each shows as show (show.id + show.start)}
@@ -41,8 +45,47 @@
 </div>
 
 <style>
+  .channel {
+    background-color: var(--color-background);
+  }
   span {
     color: #777;
+    padding: 0 1em;
+    overflow-y: hidden;
+  }
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  .actions {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+  }
+  button {
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
+    background-color: var(--color-secondary);
+    border: 1px solid #ccc;
+    user-select: none;
+
+    padding: 6px 12px;
+    font-size: 14px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    border-radius: 5px;
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: var(--color-background-inverted);
+    cursor: default;
   }
   .shows {
     max-height: 80vh;

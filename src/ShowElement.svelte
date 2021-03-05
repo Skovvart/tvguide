@@ -109,7 +109,7 @@
     border: 1px solid #eee;
   }
   p.show {
-    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    background-image: var(--gradient-dark);
     cursor: pointer;
     user-select: none;
   }
@@ -120,8 +120,11 @@
   ul {
     margin-block: unset;
   }
-  .Alle {
+  .Alle,
+  .undefined {
     color: #000;
+    background-color: #fcfcfc;
+    border-color: #dfdfdf;
   }
   .Serie {
     color: #fff;

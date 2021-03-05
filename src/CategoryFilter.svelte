@@ -11,6 +11,16 @@
   };
 </script>
 
-{#each Object.keys(categories) as filter}
-  <Category selected={selectedFilter === filter} click={() => selectFilter(filter)} category={filter} />
-{/each}
+<div class="categories">
+  {#each Object.keys(categories) as filter}
+    <Category selected={selectedFilter === filter} click={() => selectFilter(filter)} category={filter} />
+  {/each}
+</div>
+
+<style>
+  .categories {
+    margin: 0.5em 0;
+    display: flex;
+    gap: 0.5em;
+  }
+</style>

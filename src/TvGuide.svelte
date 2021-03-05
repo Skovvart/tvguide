@@ -54,6 +54,39 @@ Feature-map:
 {/await}
 
 <style>
+  :global(:root) {
+    --color-primary: #4b7599;
+    --color-secondary: #2c4459;
+    --color-text: #252525;
+    --color-background: #f7fbfc;
+    --color-text-inverted: #f7fbfc;
+    --color-background-inverted: #252525;
+    --color-link: #4b7599;
+    --gradient-light: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+    --gradient-dark: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root) {
+      --color-text: #f7fbfc;
+      --color-background: #252525;
+      --color-text-inverted: #252525;
+      --color-background-inverted: #f7fbfc;
+      --color-link: #6aa5d9;
+    }
+  }
+  :global(html, body) {
+    position: relative;
+  }
+  :global(body) {
+    color: #333;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background-color: var(--color-primary);
+    background-image: var(--gradient-dark);
+  }
+
   .channels {
     display: grid;
 
