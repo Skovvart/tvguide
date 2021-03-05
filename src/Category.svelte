@@ -14,6 +14,7 @@
     display: inline-block;
     background-color: #fff;
     border: 1px solid #ccc;
+    user-select: none;
 
     padding: 6px 12px;
     font-size: 14px;

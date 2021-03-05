@@ -10,3 +10,12 @@
 {#if availableChannels.length}
   <Typeahead data={availableChannels} {extract} inputAfterSelect="clear" limit={20} on:select={c => addUserChannel(c.detail.original)} hideLabel={true} placeholder="Tilføj kanal" />
 {/if}
+
+<style>
+  :global([data-svelte-typeahead]) {
+    z-index: 1;
+  }
+  :global([data-svelte-typeahead] ul) {
+    margin-block: unset;
+  }
+</style>

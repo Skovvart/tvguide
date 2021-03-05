@@ -41,17 +41,11 @@
 </div>
 
 <style>
-  img {
-    /* display: block; */
-  }
   span {
     color: #777;
   }
-  div {
-    max-height: 80vh;
-  }
   .shows {
-    max-height: 100%;
+    max-height: 80vh;
     overflow-y: auto;
   }
 </style>
