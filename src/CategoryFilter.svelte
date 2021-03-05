@@ -22,5 +22,6 @@
     margin: 0.5em 0;
     display: flex;
     gap: 0.5em;
+    flex-wrap: wrap;
   }
 </style>
