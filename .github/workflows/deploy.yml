@@ -20,8 +20,8 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: __sapper__/export
-          remoteDir: public_html
+          localDir: public
+          remoteDir: tv
           forceSsl: true
       - name: Purge cloudflare cache
         uses: jakejarvis/cloudflare-purge-action@master
