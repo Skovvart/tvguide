@@ -23,7 +23,7 @@
     vertical-align: middle;
 
     border-radius: 5px;
-    background-image: var(----gradient-dark);
+    background-image: var(--gradient-dark);
   }
   .pointer {
     cursor: pointer;
