@@ -85,12 +85,14 @@ Feature-map:
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     background-color: var(--color-primary);
     background-image: var(--gradient-dark);
-
+  }
+  :global(html) {
+    height: auto;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
   }
-  :global(body::-webkit-scrollbar) {
+  :global(html::-webkit-scrollbar) {
     /* WebKit */
     width: 0;
     height: 0;
