@@ -5,7 +5,7 @@
   export let click: () => void = ignore;
 </script>
 
-<span class={category} class:selected class:pointer={click !== ignore} on:click={click}>{category}</span>
+<span class={category} class:selected class:pointer={click !== ignore} on:click={click} role={click !== ignore ? "radio" : "presentation"}>{category}</span>
 
 <style>
   span {
@@ -23,7 +23,7 @@
     vertical-align: middle;
 
     border-radius: 5px;
-    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    background-image: var(----gradient-dark);
   }
   .pointer {
     cursor: pointer;

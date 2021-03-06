@@ -54,7 +54,6 @@
     overflow-y: hidden;
   }
   .header {
-    width: 100%;
     display: flex;
     align-items: center;
     user-select: none;

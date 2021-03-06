@@ -44,8 +44,10 @@ Feature-map:
 {#await dataPromise}
   <p>Indlæser TV guide...</p>
 {:then _}
-  <ChannelPicker />
-  <CategoryFilter />
+  <div class="header">
+    <ChannelPicker />
+    <CategoryFilter />
+  </div>
   <div class="channels">
     {#each orderedChannels as channel (channel.id)}
       <ChannelElement {channel} includeShow={includeShowWithBuffer} />
@@ -74,9 +76,7 @@ Feature-map:
       --color-link: #6aa5d9;
     }
   }
-  :global(html, body) {
-    position: relative;
-  }
+
   :global(body) {
     color: #333;
     margin: 0;
@@ -85,12 +85,30 @@ Feature-map:
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     background-color: var(--color-primary);
     background-image: var(--gradient-dark);
+
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  :global(body::-webkit-scrollbar) {
+    /* WebKit */
+    width: 0;
+    height: 0;
+  }
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 3em;
+  }
+  :global(.header > *) {
+    flex-grow: 1;
   }
 
   .channels {
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     gap: 2em;
   }
 </style>

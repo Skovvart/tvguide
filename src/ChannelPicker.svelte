@@ -14,6 +14,10 @@
 <style>
   :global([data-svelte-typeahead]) {
     z-index: 1;
+    border-radius: 5px;
+  }
+  :global([data-svelte-search] input[name]) {
+    border-radius: 5px;
   }
   :global([data-svelte-typeahead] ul) {
     margin-block: unset;
