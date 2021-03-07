@@ -123,11 +123,9 @@ Feature-map:
     transform: rotate(180deg);
   }
   .header__logo svg {
-    margin-right: 1em;
     height: 50px;
     width: 50px;
     fill: #f7fbfc;
-
     transition: transform 0.3s ease-in-out;
   }
 
