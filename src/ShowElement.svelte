@@ -1,107 +1,57 @@
 <script lang="ts">
-  import dayjs from "dayjs";
-
-  import { formatTimestamp, distinct } from "./utils";
   import type { Channel, Show, ShowDescription } from "./api";
+  import dayjs from "dayjs";
   import { getShowDescription } from "./api";
-  import { nowSeconds, channels } from "./state";
-  import ProgressBar from "./ProgressBar.svelte";
-  import Category from "./Category.svelte";
   import { getCategory } from "./categories";
+  import { nowSeconds, filterCategories } from "./state";
+  import { formatTimestamp } from "./utils";
+  import ProgressBar from "./ProgressBar.svelte";
+  import ShowDescriptionElement from "./ShowDescriptionElement.svelte";
+  import Spinner from "./Spinner.svelte";
 
   export let channel: Channel;
   export let show: Show;
   export let lastShow: boolean;
 
-  let description: null | ShowDescription = null;
-  $: distinctCategories = description?.categories && distinct(description.categories.map(getCategory).filter(c => c !== "Alle"));
-  $: alternativeShowings = description?.locations.schedules.filter(showing => (showing.channelId !== channel.id || showing.start !== show.start) && showing.stop >= $nowSeconds);
-
-  const channelName = (channelId: string) => $channels.find(c => c.id === channelId)?.title;
-
-  const timeLeft = (secondsLeft: number) => dayjs.duration(secondsLeft, "seconds").humanize() + " tilbage";
-
-  let descriptionRequested = false;
   let showDescription = false;
+  let descriptionPromise: null | Promise<ShowDescription> = null;
+
   const toggleDescription = async () => {
-    if (!descriptionRequested) {
-      descriptionRequested = true;
-      description = await getShowDescription(channel.id, show.id);
-    }
     showDescription = !showDescription;
+    descriptionPromise ??= getShowDescription(channel.id, show.id);
   };
+
+  $: showEndTime = lastShow || showDescription || $filterCategories.length;
+  $: inProgress = $nowSeconds >= show.start && $nowSeconds < show.stop;
+  $: showPercentage = inProgress && ($nowSeconds - show.start) / (show.stop - show.start);
+  $: showTimeLeft = inProgress && dayjs.duration(show.stop - $nowSeconds, "seconds").humanize() + " tilbage";
 </script>
 
 <div class="show" class:show-over={show.stop <= $nowSeconds}>
-  <p
-    class={"show " +
-      show.categories
-        ?.map(getCategory)
-        .filter(c => c !== "Alle")
-        .find(_ => true)}
-    on:click={toggleDescription}
-  >
+  <p class={"show " + (show.categories?.map(getCategory).find(_ => true) || "Alle")} on:click={toggleDescription}>
     {formatTimestamp(show.start)}
     {show.title}
     {#if show.premiere}
       [PREMIERE]
     {/if}
-    {#if lastShow}
+    {#if showEndTime}
       <br />
       {formatTimestamp(show.stop)}
     {/if}
   </p>
-  {#if $nowSeconds >= show.start && $nowSeconds < show.stop}
-    <ProgressBar percentage={($nowSeconds - show.start) / (show.stop - show.start)} title={timeLeft(show.stop - $nowSeconds)} />
+  {#if inProgress}
+    <ProgressBar percentage={showPercentage} title={showTimeLeft} />
   {/if}
-  {#if description !== null && showDescription}
-    {#if description.teaser || description.series?.episode}
-      <p>
-        {#if description.teaser}
-          <em>{description.teaser}</em>
-        {/if}
-        {#if description.teaser && description.series?.episode}
-          -
-        {/if}
-        {#if description.series?.episode}
-          {#if description.series.season}
-            Sæson {description.series.season} episode {description.series.episode}
-          {:else}
-            Episode {description.series.episode}
-          {/if}
-        {/if}
-      </p>
-    {/if}
-
-    <p>{description.desc || "(ingen beskrivelse)"}</p>
-    {#if alternativeShowings?.length}
-      <p>Vises også på</p>
-      <ul>
-        {#each alternativeShowings as showing}
-          <li>{channelName(showing.channelId)} {dayjs.unix(showing.start).from(dayjs.unix($nowSeconds))} ({formatTimestamp(showing.start)})</li>
-        {/each}
-      </ul>
-    {/if}
-    {#if description.prodYear}
-      <p>Produceret i {description.prodYear}</p>
-    {/if}
-    {#if distinctCategories?.length}
-      <div class="categories">
-        {#each distinctCategories as category}
-          <Category {category} />
-        {/each}
-      </div>
-    {/if}
+  {#if showDescription}
+    {#await descriptionPromise}
+      <Spinner />
+    {:then description}
+      <ShowDescriptionElement {channel} {show} {description} />
+    {/await}
   {/if}
 </div>
 
 <style>
-  .categories {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 0.5em;
-  }
   .show-over {
     opacity: 0.5;
   }
@@ -118,14 +68,8 @@
     margin-block: unset;
     color: var(--color-text);
   }
-  ul {
-    margin-block: unset;
-  }
-  li {
-    color: var(--color-text);
-  }
-  .Alle,
-  .undefined {
+
+  .Alle {
     color: #000;
     background-color: #fcfcfc;
     border-color: #dfdfdf;
