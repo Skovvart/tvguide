@@ -4,9 +4,12 @@ export const formatTimestamp = (timestampSeconds: number) => dayjs.unix(timestam
 
 export const distinct = <T>(items: T[]) => [...new Set(items)]
 
-// const convertArrayToObject = (array, key) => array.reduce((acc, item) => (acc[item[key]] = item, acc), {});
-
 export const intersect = <T extends unknown>(a: T[], b: T[]): T[] => {
     const setB = new Set(b);
     return [...new Set(a)].filter(x => setB.has(x));
 };
+
+export const promiseMinimumExecutionTime = async <T>(time: number, promise: Promise<T>) => {
+    await Promise.all([new Promise(resolve => setTimeout(resolve, time)), promise]);
+    return await promise;
+}

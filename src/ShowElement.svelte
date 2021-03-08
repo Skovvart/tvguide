@@ -4,7 +4,7 @@
   import { getShowDescription } from "./api";
   import { getCategory } from "./categories";
   import { nowSeconds, filterCategories } from "./state";
-  import { formatTimestamp } from "./utils";
+  import { formatTimestamp, promiseMinimumExecutionTime } from "./utils";
   import ProgressBar from "./ProgressBar.svelte";
   import ShowDescriptionElement from "./ShowDescriptionElement.svelte";
   import Spinner from "./Spinner.svelte";
@@ -18,7 +18,7 @@
 
   const toggleDescription = async () => {
     showDescription = !showDescription;
-    descriptionPromise ??= getShowDescription(channel.id, show.id);
+    descriptionPromise ??= promiseMinimumExecutionTime(300, getShowDescription(channel.id, show.id));
   };
 
   $: showEndTime = lastShow || showDescription || $filterCategories.length;
