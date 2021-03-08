@@ -18,7 +18,7 @@
 
   const toggleDescription = async () => {
     showDescription = !showDescription;
-    descriptionPromise ??= promiseMinimumExecutionTime(300, getShowDescription(channel.id, show.id));
+    descriptionPromise ??= promiseMinimumExecutionTime(150, getShowDescription(channel.id, show.id));
   };
 
   $: showEndTime = lastShow || showDescription || $filterCategories.length;
