@@ -39,7 +39,7 @@
         <ShowElement {channel} {show} lastShow={show === lastShow} />
       {/each}
     {:else}
-      <span>(Ingen programmer at vise)</span>
+      <p>(Ingen programmer at vise)</p>
     {/if}
   </div>
 </div>
@@ -48,10 +48,10 @@
   .channel {
     background-color: var(--color-background);
   }
-  span {
+  p {
     color: #777;
-    padding: 0 1em;
-    overflow-y: hidden;
+    padding: 0.5em 1em;
+    margin-block: unset;
   }
   .header {
     display: flex;
