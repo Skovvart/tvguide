@@ -44,7 +44,7 @@ Feature-map:
 {#await dataPromise}
   <p>Indlæser TV guide...</p>
 {:then _}
-  <div class="header">
+  <header class="header">
     <a href="https://www.skovvart.dk" class="header__logo" aria-label="skovvart.dk" title="skovvart.dk">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path
@@ -54,12 +54,12 @@ Feature-map:
     </a>
     <ChannelPicker />
     <CategoryFilter />
-  </div>
-  <div class="channels">
+  </header>
+  <main class="channels">
     {#each orderedChannels as channel (channel.id)}
       <ChannelElement {channel} includeShow={includeShowWithBuffer} />
     {/each}
-  </div>
+  </main>
 {/await}
 
 <style>

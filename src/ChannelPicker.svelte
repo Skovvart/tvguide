@@ -8,7 +8,7 @@
 </script>
 
 {#if availableChannels.length}
-  <Typeahead data={availableChannels} {extract} inputAfterSelect="clear" limit={20} on:select={c => addUserChannel(c.detail.original)} hideLabel={true} placeholder="Tilføj kanal" />
+  <Typeahead data={availableChannels} {extract} inputAfterSelect="clear" limit={20} on:select={c => addUserChannel(c.detail.original)} label="Tilføj kanal" hideLabel={true} id="add-channel" placeholder="Tilføj kanal" />
 {/if}
 
 <style>
