@@ -97,6 +97,7 @@ Feature-map:
 
   :global(html) {
     height: auto;
+    min-height: 100vh;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
