@@ -24,7 +24,6 @@ export const nowSeconds = derived(now, $now => +$now / 1000);
 
 export const currentTvDate = derived(now, $now => dayjs($now).subtract(6, "hour").format("YYYY-MM-DD")); // a tvtid "day" goes into next calendar day to around 6 in the morning
 
-const defaultChannels = ["1", "2", "3", "8", "7"]
+const defaultChannels = ["1", "2", "3", "8", "7"];
 export const userChannels = writable(getUserChannels() ?? defaultChannels)
 userChannels.subscribe(saveUserChannels)
-

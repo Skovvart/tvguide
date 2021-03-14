@@ -3,7 +3,7 @@ const getChannels = async (): Promise<Channel[]> => {
   return (await channelsResponse.json()).channels;
 };
 
-const getProgramsForChannelsAndDate = async (channelIds: string[], date: Date): Promise<ChannelProgram[]> => {
+const getProgramsForChannelsAndDate = async (channelIds: string[], date: string): Promise<ChannelProgram[]> => {
   const channelQueryParams = channelIds.map(id => `ch=${id}`).join("&");
   const programsResponse = await fetch(`https://tvtid-api.api.tv2.dk/api/tvtid/v1/epg/dayviews/${date}?${channelQueryParams}`);
   return await programsResponse.json();

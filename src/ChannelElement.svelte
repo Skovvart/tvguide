@@ -1,12 +1,20 @@
 <script lang="ts">
   import type { Channel, Show } from "./api";
-  import { programs, userChannels } from "./state";
+  import { programs, userChannels, filterCategories, nowSeconds } from "./state";
+  import { intersect } from "./utils";
   import ShowElement from "./ShowElement.svelte";
 
   export let channel: Channel;
-  export let includeShow: (show: Show) => boolean;
+
+  const includeShow = (recentProgramsTimeSecondsBuffer: number, filterCategories: string[], nowSeconds: number) => (show: Show) => {
+    if (filterCategories.length && !intersect(filterCategories, show.categories).length) return false;
+    return show.stop + recentProgramsTimeSecondsBuffer >= nowSeconds;
+  };
+
+  $: includeShowWithBuffer = includeShow(60 * 60, $filterCategories, $nowSeconds); // also include shows that ended within the last hour
+
   $: program = $programs.find(p => p.id === channel.id)?.programs;
-  $: shows = program?.filter(s => includeShow(s));
+  $: shows = program?.filter(s => includeShowWithBuffer(s));
   $: lastShow = shows?.[shows.length - 1];
   $: currentPosition = $userChannels.indexOf(channel.id);
   $: firstUserChannel = currentPosition === 0;
