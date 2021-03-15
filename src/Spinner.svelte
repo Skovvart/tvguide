@@ -1,4 +1,4 @@
-<svg viewBox="0 0 100 100">
+<svg viewBox="0 0 100 100" {...$$restProps}>
   <circle fill="#fff" cx="6" cy="50" r="6">
     <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin=".1" />
   </circle>

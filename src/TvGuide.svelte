@@ -43,11 +43,10 @@
     </svg>
   </a>
   <ChannelPicker />
-  <CategoryFilter />
+  <CategoryFilter>
+    <Spinner style="height: 2em; visibility: {loadingData ? 'visible' : 'hidden'}" />
+  </CategoryFilter>
 </header>
-{#if loadingData}
-  <Spinner />
-{/if}
 <main class="channels">
   {#await dataPromise}
     <Spinner />
@@ -124,6 +123,7 @@
   .header__logo {
     flex-grow: 0;
   }
+
   .header__logo:focus-within svg,
   .header__logo:hover svg {
     transform: rotate(180deg);
