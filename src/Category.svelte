@@ -3,12 +3,18 @@
   export let selected: boolean = false;
   const ignore = () => {};
   export let click: () => void = ignore;
+  $: clickable = click !== ignore;
 </script>
 
-<span class={category} class:selected class:pointer={click !== ignore} on:click={click} role={click !== ignore ? "radio" : "presentation"}>{category}</span>
+{#if clickable}
+  <button class={category} class:selected class:pointer={click !== ignore} on:click={click} role={click !== ignore ? "radio" : "presentation"}>{category}</button>
+{:else}
+  <span class={category} class:selected>{category}</span>
+{/if}
 
 <style>
-  span {
+  span,
+  button {
     color: #fff;
     font-weight: 700;
     display: inline-block;

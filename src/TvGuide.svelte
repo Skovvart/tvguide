@@ -44,7 +44,7 @@
   </a>
   <ChannelPicker />
   <CategoryFilter>
-    <Spinner style="height: 2em; visibility: {loadingData ? 'visible' : 'hidden'}" />
+    <Spinner style="visibility: {loadingData ? 'visible' : 'hidden'}" />
   </CategoryFilter>
 </header>
 <main class="channels">
@@ -118,10 +118,15 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0 3em;
+    padding: 0.5em;
   }
 
   .header__logo {
     flex-grow: 0;
+  }
+
+  .header__logo:focus {
+    outline: 3px solid #f7fbfc;
   }
 
   .header__logo:focus-within svg,

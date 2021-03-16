@@ -41,7 +41,7 @@
       <button on:click={() => ($userChannels = $userChannels.filter(c => c !== channel.id))} title="Fjern kanal" aria-label="Fjern kanal">X</button>
     </div>
   </div>
-  <div class="shows">
+  <div class="shows" tabindex="0">
     {#if shows?.length}
       {#each shows as show (show.id + show.start)}
         <ShowElement {channel} {show} lastShow={show === lastShow} />

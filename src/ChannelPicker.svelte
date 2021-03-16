@@ -19,6 +19,10 @@
   :global([data-svelte-search] input[name]) {
     border-radius: 5px;
   }
+  :global([data-svelte-search] input[name]:focus) {
+    outline-color: var(--color-primary);
+    outline-offset: 0;
+  }
   :global([data-svelte-typeahead] ul) {
     margin-block: unset;
   }
