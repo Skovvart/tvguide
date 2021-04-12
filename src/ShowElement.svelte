@@ -28,7 +28,7 @@
 </script>
 
 <div class="show" class:show-over={show.stop <= $nowSeconds}>
-  <p class={"show " + (show.categories?.map(getCategory).find(_ => true) || "Alle")} on:click={toggleDescription}>
+  <button class={"show " + (show.categories?.map(getCategory).find(_ => true) || "Alle")} on:click={toggleDescription}>
     {formatTimestamp(show.start)}
     {show.title}
     {#if show.premiere}
@@ -38,7 +38,7 @@
       <br />
       {formatTimestamp(show.stop)}
     {/if}
-  </p>
+  </button>
   {#if inProgress}
     <ProgressBar percentage={showPercentage} title={showTimeLeft} />
   {/if}
@@ -58,14 +58,39 @@
   div.show {
     border: 1px solid #eee;
   }
-  p.show {
+  button {
+    appearance: unset;
+    -webkit-writing-mode: unset;
+    text-rendering: unset;
+    letter-spacing: unset;
+    word-spacing: unset;
+    text-transform: unset;
+    text-indent: unset;
+    text-shadow: unset;
+    text-align: unset;
+    align-items: unset;
+    background-color: unset;
+    box-sizing: unset;
+    margin: unset;
+    font: unset;
+    border-width: unset;
+    border-style: unset;
+    border-color: unset;
+    border-image: unset;
+
+    display: block;
     background-image: var(--gradient-dark);
     cursor: pointer;
     user-select: none;
-  }
-  p {
     padding: 0.5em 1em;
+
+    box-sizing: border-box;
+    width: 100%;
+
     margin-block: unset;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
     color: var(--color-text);
   }
 
