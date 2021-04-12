@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Channel, Show, ShowDescription } from "./api";
+  import type { Channel, Show } from "./api";
   import dayjs from "dayjs";
   import { getShowDescription } from "./api";
   import { getCategory } from "./categories";
-  import { nowSeconds, filterCategories } from "./state";
+  import { nowSeconds, filterCategories, descriptionPromises, shownDescription } from "./state";
   import { formatTimestamp, promiseMinimumExecutionTime } from "./utils";
   import ProgressBar from "./ProgressBar.svelte";
   import ShowDescriptionElement from "./ShowDescriptionElement.svelte";
@@ -13,18 +13,24 @@
   export let show: Show;
   export let lastShow: boolean;
 
-  let showDescription = false;
-  let descriptionPromise: null | Promise<ShowDescription> = null;
+  const defaultPromise = new Promise((_, __) => {});
 
-  const toggleDescription = async () => {
-    showDescription = !showDescription;
-    descriptionPromise ??= promiseMinimumExecutionTime(150, getShowDescription(channel.id, show.id));
-  };
-
+  $: showDescription = $shownDescription?.channel === channel && $shownDescription.show === show;
   $: showEndTime = lastShow || showDescription || $filterCategories.length;
   $: inProgress = $nowSeconds >= show.start && $nowSeconds < show.stop;
   $: showPercentage = inProgress && ($nowSeconds - show.start) / (show.stop - show.start);
   $: showTimeLeft = inProgress && dayjs.duration(show.stop - $nowSeconds, "seconds").humanize() + " tilbage";
+  // $: descriptionPromise = $descriptionPromises[channel.id]?.[show.id] || defaultPromise;
+  let descriptionPromise = $descriptionPromises[channel.id]?.[show.id] || defaultPromise; // Making this reactive (above line) causes some issue where the promise-update isn't being picked up on for ages unrelated to http or minimum delay. I have no good explanation why but a local variable seems to work like I intended...
+  const toggleDescription = async () => {
+    $shownDescription = showDescription ? null : { channel: channel, show: show };
+
+    if (!$descriptionPromises[channel.id]) {
+      $descriptionPromises[channel.id] = {};
+    }
+    $descriptionPromises[channel.id][show.id] ??= promiseMinimumExecutionTime(150, getShowDescription(channel.id, show.id));
+    descriptionPromise = $descriptionPromises[channel.id][show.id];
+  };
 </script>
 
 <div class="show" class:show-over={show.stop <= $nowSeconds}>
