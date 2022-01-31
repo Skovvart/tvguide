@@ -44,7 +44,9 @@
   <div class="shows" tabindex="0">
     {#if shows?.length}
       {#each shows as show (show.id + show.start)}
-        <ShowElement {channel} {show} lastShow={show === lastShow} />
+        <div>
+          <ShowElement {channel} {show} lastShow={show === lastShow} />
+        </div>
       {/each}
     {:else}
       <p>(Ingen programmer at vise)</p>
