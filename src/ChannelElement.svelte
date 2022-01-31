@@ -43,11 +43,11 @@
   </div>
   <div class="shows" tabindex="0">
     {#if shows?.length}
-      {#each shows as show (show.id + show.start)}
-        <div>
+      <div>
+        {#each shows as show (show.id + show.start)}
           <ShowElement {channel} {show} lastShow={show === lastShow} />
-        </div>
-      {/each}
+        {/each}
+      </div>
     {:else}
       <p>(Ingen programmer at vise)</p>
     {/if}
