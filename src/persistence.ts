@@ -6,7 +6,7 @@ const dbSet = <T>(key: string, value: T) => localStorage.setItem(key, JSON.strin
 export const getUserChannels = () => <string[]>dbGet("userChannels");
 export const saveUserChannels = (userChannels: string[]) => dbSet("userChannels", userChannels);
 
-export const getCachedChannels = (): Channel[] => dbGet("channels");
+export const getCachedChannels = () => dbGet<Channel[]>("channels").filter(c => c.id > "2147483647");
 export const cacheChannels = (channels: Channel[]) => dbSet("channels", channels);
 
 export const getCachedPrograms = (): ChannelProgram[] => dbGet("programs");
