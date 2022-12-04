@@ -1,7 +1,7 @@
 const getChannels = async (): Promise<Channel[]> => {
   const channelsResponse = await fetch("https://tvtid-api.api.tv2.dk/api/tvtid/v1/schedules/channels");
   const channels : Channel[] = (await channelsResponse.json()).channels;
-  return channels.filter(c => c.id > "2147483647");
+  return channels.filter(c => +c.id < 214748400);
 };
 
 const getProgramsForChannelsAndDate = async (channelIds: string[], date: string): Promise<ChannelProgram[]> => {
