@@ -7,9 +7,9 @@
 </script>
 
 {#if clickable}
-  <button class={category} class:selected class:pointer={click !== ignore} on:click={click} role={click !== ignore ? "radio" : "presentation"}>{category}</button>
+  <button class={category} class:selected class:pointer={click !== ignore} on:click={click} role={click !== ignore ? "radio" : "presentation"} aria-checked={selected}>{category}</button>
 {:else}
-  <span class={category} class:selected>{category}</span>
+  <span class={category} class:selected aria-checked={selected}>{category}</span>
 {/if}
 
 <style>
