@@ -11,7 +11,7 @@
   };
 </script>
 
-<div class="categories">
+<div class="categories" role="radiogroup">
   {#each Object.keys(categories) as filter}
     <Category selected={selectedFilter === filter} click={() => selectFilter(filter)} category={filter} />
   {/each}
