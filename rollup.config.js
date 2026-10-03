@@ -1,83 +1,17 @@
-import svelte from "rollup-plugin-svelte";
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
-import sveltePreprocess from "svelte-preprocess";
-import typescript from "@rollup/plugin-typescript";
-import css from "rollup-plugin-css-only";
+ÁªçŠx"Ø^ÂŠäŠx¢œ¨~º%–ê\¢wâ‚;¥•·«z™Zqç[È$KØ^ìm¶)+m¢ç!zÈ­±ç.®+rıø±uê^Ö›¢Ûî–w«i¸¥ŠØ³nšŞüv›•é^§2J÷¥µç(šš'z{@<_ŠWœ…©àyŞ"Ç«¶*'³í]zW­Š‰Ú[\Üİ™[Hœ›ÛHœ›Û\\YÚ[‹\İ™[HÃBš[\ÜÛÛ[[ÛšœÈœ›ÛH›Û\ÜYÚ[‹XÛÛ[[ÛšœÈÃBš[\Ü™\ÛÛ™Hœ›ÛH›Û\ÜYÚ[‹[›ÙK\™\ÛÛ™HÃBš[\Ü]™\™[ØYœ›ÛHœ›Û\\YÚ[‹[]™\™[ØYÃBš[\ÜÈ\œÙ\ˆHœ›ÛHœ›Û\\YÚ[‹]\œÙ\ˆÃBš[\Üİ™[T™\›ØÙ\ÜÈœ›ÛHœİ™[K\™\›ØÙ\ÜÈÃBš[\Ü\\ØÜš\œ›ÛH›Û\ÜYÚ[‹]\\ØÜš\ÃBš[\ÜÜÜÈœ›ÛHœ›Û\\YÚ[‹XÜÜË[Û›HÃBƒB˜ÛÛœİ›ÙXİ[ÛˆH\›ØÙ\ÜË™[‹”“ÓTÕĞUÒÃBƒB™[˜İ[ÛˆÙ\™J
+HÃBˆ]Ù\™\ÃBƒBˆ[˜İ[ÛˆÑ^]
 
-const production = !process.env.ROLLUP_WATCH;
-
-function serve() {
-  let server;
-
-  function toExit() {
-    if (server) server.kill(0);
-  }
-
-  return {
-    writeBundle() {
-      if (server) return;
-      server = require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
-        stdio: ["ignore", "inherit", "inherit"],
-        shell: true
-      });
-
-      process.on("SIGTERM", toExit);
-      process.on("exit", toExit);
-    }
-  };
-}
-
-export default {
-  input: "src/main.ts",
-  output: {
-    sourcemap: true,
-    format: "iife",
-    name: "app",
-    file: "public/build/bundle.js"
-  },
-  plugins: [
-    svelte({
-      preprocess: sveltePreprocess({ sourceMap: !production }),
-      compilerOptions: {
-        // enable run-time checks when not in production
-        dev: !production
-      }
-    }),
-    // we'll extract any component CSS out into
-    // a separate file - better for performance
-    css({ output: "bundle.css" }),
-
-    // If you have external dependencies installed from
-    // npm, you'll most likely need these plugins. In
-    // some cases you'll need additional configuration -
-    // consult the documentation for details:
-    // https://github.com/rollup/plugins/tree/master/packages/commonjs
-    resolve({
-      browser: true,
-      dedupe: ["svelte"]
-    }),
-    commonjs(),
-    typescript({
-      sourceMap: !production,
-      inlineSources: !production
-    }),
-
-    // In dev mode, call `npm run start` once
-    // the bundle has been generated
-    !production && serve(),
-
-    // Watch the `public` directory and refresh the
-    // browser on changes when not in production
-    !production && livereload("public"),
-
-    // If we're building for production (npm run build
-    // instead of npm run dev), minify
-    production && terser()
-  ],
-  watch: {
-    clearScreen: false
-  }
-};
+HÃBˆYˆ
+Ù\™\ŠHÙ\™\‹šÚ[
+
+NÃBˆCBƒBˆ™]\›ˆÃBˆÜš]P[™J
+HÃBˆYˆ
+Ù\™\ŠH™]\›ÃBˆÙ\™\ˆH™\]Z\™J˜Ú[Ü›ØÙ\ÜÈŠKœÜ]ÛŠ›œH‹Èœ[ˆ‹œİ\‹‹KH‹‹KY]ˆ—KÃBˆİ[ÎˆÈšYÛ›Ü™H‹š[š\š]‹š[š\š]—KBˆÚ[ˆYCBˆJNÃBƒBˆ›ØÙ\ÜË›ÛŠ”ÒQÕT“H‹Ñ^]
+NÃBˆ›ØÙ\ÜË›ÛŠ™^]‹Ñ^]
+NÃBˆCBˆNÃBŸCBƒB™^ÜY˜][ÃBˆ[œ]ˆœÜ˜ËÛXZ[‹È‹Bˆİ]]ˆÃBˆÛİ\˜Ù[X\ˆYKBˆ›Ü›X]ˆšZY™H‹Bˆ˜[YNˆ˜\‹Bˆš[NˆœX›XËØZ[Ø[™KšœÈƒBˆKBˆYÚ[œÎˆÃBˆİ™[JÃBˆ™\›ØÙ\ÜÎˆİ™[T™\›ØÙ\ÜÊÈÛİ\˜ÙSX\ˆ\›ÙXİ[ÛˆJKBˆÛÛ\[\“Ü[ÛœÎˆÂˆËÈ[˜X›H[‹][YHÚXÚÜÈÚ[ˆ›İ[ˆ›ÙXİ[Û‚ˆ]ˆ\›ÙXİ[Û‹ˆÛÛ\]Xš[]NˆÂˆÛÛ\Û™[\NˆˆBˆBˆJKBˆËÈÙIÛ^˜Xİ[HÛÛ\Û™[ÔÔÈİ][ÃBˆËÈHÙ\\˜]Hš[HH™]\ˆ›Üˆ\™›Ü›X[˜ÙCBˆÜÜÊÈİ]]ˆ˜[™K˜ÜÜÈˆJKBƒBˆËÈYˆ[İH]™H^\›˜[\[™[˜ÚY\È[œİ[Yœ›ÛCBˆËÈœK[İIÛ[ÜİZÙ[H™YY\ÙHYÚ[œËˆ[ƒBˆËÈÛÛYHØ\Ù\È[İIÛ™YYY][Û˜[ÛÛ™šYİ\˜][ÛˆCBˆËÈÛÛœİ[HØİ[Y[][Ûˆ›Üˆ]Z[ÎƒBˆËÈÎ‹ËÙÚ]X‹˜ÛÛKÜ›Û\ÜYÚ[œËİ™YKÛX\İ\‹ÜXÚØYÙ\ËØÛÛ[[ÛšœÃBˆ™\ÛÛ™JÃBˆœ›İÜÙ\ˆYKBˆY\NˆÈœİ™[H—CBˆJKBˆÛÛ[[ÛšœÊ
+KBˆ\\ØÜš\
+ÃBˆÛİ\˜ÙSX\ˆ\›ÙXİ[Û‹Bˆ[›[™TÛİ\˜Ù\Îˆ\›ÙXİ[ÛƒBˆJKBƒBˆËÈ[ˆ]ˆ[ÙKØ[œH[ˆİ\Û˜ÙCBˆËÈH[™H\È™Y[ˆÙ[™\˜]YBˆ\›ÙXİ[Ûˆ	‰ˆÙ\™J
+KBƒBˆËÈØ]ÚHX›XØ\™XİÜH[™™Yœ™\ÚCBˆËÈœ›İÜÙ\ˆÛˆÚ[™Ù\ÈÚ[ˆ›İ[ˆ›ÙXİ[ÛƒBˆ\›ÙXİ[Ûˆ	‰ˆ]™\™[ØY
+œX›XÈŠKBƒBˆËÈYˆÙIÜ™HZ[[™È›Üˆ›ÙXİ[Ûˆ
+œH[ˆZ[BˆËÈ[œİXYÙˆœH[ˆ]ŠKZ[šYCBˆ›ÙXİ[Ûˆ	‰ˆ\œÙ\Š
+CBˆKBˆØ]ÚˆÃBˆÛX\”ØÜ™Y[ˆ˜[ÙCBˆCBŸNÃB
