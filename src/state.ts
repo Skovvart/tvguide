@@ -14,10 +14,11 @@ export const filterCategories = writable([]);
 
 // Update loop based on "JavaScript counters the hard way - HTTP 203" https://youtu.be/MCi6AZMkxcU?t=1219
 // Accurate over time (not important here, but sure), update visually steadily (not important here, but sure), avoids running in background (yes, important), otherwise good CPU usage (sure, nice, was not too worried with previous implementation though)
+
 const now = readable(new Date(), set => {
-	const start = document.timeline.currentTime;
-	let interval;
-	const frame = time => {
+	const start = performance.now();
+	let interval: ReturnType<typeof setTimeout>;
+	const frame = (time: number) => {
 		const elapsed = time - start;
 		const seconds = Math.round(elapsed / 1000);
 		set(new Date()); // call set function instead of update UI, update every 5 seconds instead of every one
@@ -29,7 +30,7 @@ const now = readable(new Date(), set => {
 	};
 	frame(start);
 	return () => {
-		clearInterval(interval);
+		clearTimeout(interval);
 	};
 });
 
