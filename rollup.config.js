@@ -1,17 +1,86 @@
-ÁªçŠx"žØ^ÂŠäŠx¢œ¨~º%–ê\¢wâ‚;¥•·«z™Zqç[È$KØ^ìm¶)ž+m¢ç!zÈ­±ç.®+rýø±uê^Ö›¢Ûî–w«i¸¥ŠØž³nšÞüv›•é^§2J÷¥µç(šš'z{@<_ŠWœ…©àyÞ"žÇ«¶*'³í]zW­Š‰Ú[\ÜÝ™[Hœ›ÛHœ›Û\\YÚ[‹\Ý™[HŽÃBš[\ÜÛÛ[[ÛšœÈœ›ÛH›Û\ÜYÚ[‹XÛÛ[[ÛšœÈŽÃBš[\Ü™\ÛÛ™Hœ›ÛH›Û\ÜYÚ[‹[›ÙK\™\ÛÛ™HŽÃBš[\Ü]™\™[ØYœ›ÛHœ›Û\\YÚ[‹[]™\™[ØYŽÃBš[\ÜÈ\œÙ\ˆHœ›ÛHœ›Û\\YÚ[‹]\œÙ\ˆŽÃBš[\ÜÝ™[T™\›ØÙ\ÜÈœ›ÛHœÝ™[K\™\›ØÙ\ÜÈŽÃBš[\Ü\\ØÜš\œ›ÛH›Û\ÜYÚ[‹]\\ØÜš\ŽÃBš[\ÜÜÜÈœ›ÛHœ›Û\\YÚ[‹XÜÜË[Û›HŽÃBƒB˜ÛÛœÝ›ÙXÝ[ÛˆH\›ØÙ\ÜË™[‹”“ÓTÕÐUÒÃBƒB™[˜Ý[ÛˆÙ\™J
-HÃBˆ]Ù\™\ŽÃBƒBˆ[˜Ý[ÛˆÑ^]
+import svelte from "rollup-plugin-svelte";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import livereload from "rollup-plugin-livereload";
+import { terser } from "rollup-plugin-terser";
+import sveltePreprocess from "svelte-preprocess";
+import typescript from "@rollup/plugin-typescript";
+import css from "rollup-plugin-css-only";
 
-HÃBˆYˆ
-Ù\™\ŠHÙ\™\‹šÚ[
-
-NÃBˆCBƒBˆ™]\›ˆÃBˆÜš]P[™J
-HÃBˆYˆ
-Ù\™\ŠH™]\›ŽÃBˆÙ\™\ˆH™\]Z\™J˜Ú[Ü›ØÙ\ÜÈŠKœÜ]ÛŠ›œH‹Èœ[ˆ‹œÝ\‹‹KH‹‹KY]ˆ—KÃBˆÝ[ÎˆÈšYÛ›Ü™H‹š[š\š]‹š[š\š]—KBˆÚ[ˆYCBˆJNÃBƒBˆ›ØÙ\ÜË›ÛŠ”ÒQÕT“H‹Ñ^]
-NÃBˆ›ØÙ\ÜË›ÛŠ™^]‹Ñ^]
-NÃBˆCBˆNÃBŸCBƒB™^ÜY˜][ÃBˆ[œ]ˆœÜ˜ËÛXZ[‹È‹BˆÝ]]ˆÃBˆÛÝ\˜Ù[X\ˆYKBˆ›Ü›X]ˆšZY™H‹Bˆ˜[YNˆ˜\‹Bˆš[NˆœX›XËØZ[Ø[™KšœÈƒBˆKBˆYÚ[œÎˆÃBˆÝ™[JÃBˆ™\›ØÙ\ÜÎˆÝ™[T™\›ØÙ\ÜÊÈÛÝ\˜ÙSX\ˆ\›ÙXÝ[ÛˆJKBˆÛÛ\[\“Ü[ÛœÎˆÂˆËÈ[˜X›H[‹][YHÚXÚÜÈÚ[ˆ›Ý[ˆ›ÙXÝ[Û‚ˆ]Žˆ\›ÙXÝ[Û‹ˆÛÛ\]Xš[]NˆÂˆÛÛ\Û™[\NˆˆBˆBˆJKBˆËÈÙIÛ^˜XÝ[žHÛÛ\Û™[ÔÔÈÝ][ÃBˆËÈHÙ\\˜]Hš[HH™]\ˆ›Üˆ\™›Ü›X[˜ÙCBˆÜÜÊÈÝ]]ˆ˜[™K˜ÜÜÈˆJKBƒBˆËÈYˆ[ÝH]™H^\›˜[\[™[˜ÚY\È[œÝ[Yœ›ÛCBˆËÈœK[ÝIÛ[ÜÝZÙ[H™YY\ÙHYÚ[œËˆ[ƒBˆËÈÛÛYHØ\Ù\È[ÝIÛ™YYY][Û˜[ÛÛ™šYÝ\˜][ÛˆCBˆËÈÛÛœÝ[HØÝ[Y[][Ûˆ›Üˆ]Z[ÎƒBˆËÈÎ‹ËÙÚ]X‹˜ÛÛKÜ›Û\ÜYÚ[œËÝ™YKÛX\Ý\‹ÜXÚØYÙ\ËØÛÛ[[ÛšœÃBˆ™\ÛÛ™JÃBˆœ›ÝÜÙ\ŽˆYKBˆY\NˆÈœÝ™[H—CBˆJKBˆÛÛ[[ÛšœÊ
-KBˆ\\ØÜš\
-ÃBˆÛÝ\˜ÙSX\ˆ\›ÙXÝ[Û‹Bˆ[›[™TÛÝ\˜Ù\Îˆ\›ÙXÝ[ÛƒBˆJKBƒBˆËÈ[ˆ]ˆ[ÙKØ[œH[ˆÝ\Û˜ÙCBˆËÈH[™H\È™Y[ˆÙ[™\˜]YBˆ\›ÙXÝ[Ûˆ	‰ˆÙ\™J
-KBƒBˆËÈØ]ÚHX›XØ\™XÝÜžH[™™Yœ™\ÚCBˆËÈœ›ÝÜÙ\ˆÛˆÚ[™Ù\ÈÚ[ˆ›Ý[ˆ›ÙXÝ[ÛƒBˆ\›ÙXÝ[Ûˆ	‰ˆ]™\™[ØY
-œX›XÈŠKBƒBˆËÈYˆÙIÜ™HZ[[™È›Üˆ›ÙXÝ[Ûˆ
-œH[ˆZ[BˆËÈ[œÝXYÙˆœH[ˆ]ŠKZ[šYžCBˆ›ÙXÝ[Ûˆ	‰ˆ\œÙ\Š
-CBˆKBˆØ]ÚˆÃBˆÛX\”ØÜ™Y[Žˆ˜[ÙCBˆCBŸNÃB
+const production = !process.env.ROLLUP_WATCH;
+
+function serve() {
+  let server;
+
+  function toExit() {
+    if (server) server.kill(0);
+  }
+
+  return {
+    writeBundle() {
+      if (server) return;
+      server = require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
+        stdio: ["ignore", "inherit", "inherit"],
+        shell: true
+      });
+
+      process.on("SIGTERM", toExit);
+      process.on("exit", toExit);
+    }
+  };
+}
+
+export default {
+  input: "src/main.ts",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "app",
+    file: "public/build/bundle.js"
+  },
+  plugins: [
+    svelte({
+      preprocess: sveltePreprocess({ sourceMap: !production }),
+      compilerOptions: {
+        // enable run-time checks when not in production
+        dev: !production,
+        compatibility: {
+          componentApi: 4
+        }
+      }
+    }),
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({ output: "bundle.css" }),
+
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration -
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve({
+      browser: true,
+      dedupe: ["svelte"]
+    }),
+    commonjs(),
+    typescript({
+      sourceMap: !production,
+      inlineSources: !production
+    }),
+
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    !production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    !production && livereload("public"),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    clearScreen: false
+  }
+};
