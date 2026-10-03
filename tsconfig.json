@@ -9,6 +9,8 @@
     "public/*"
   ],
   "compilerOptions": {
+    "strict": false,
+    "verbatimModuleSyntax": true,
     "lib": [
       "es2020",
       "DOM"

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { userChannels, channels } from "./state";
-  import Typeahead from "svelte-typeahead";
+  import TypeaheadComponent from "svelte-typeahead";
+  const Typeahead: any = TypeaheadComponent;
   $: availableChannels = $channels.filter(c => $userChannels.indexOf(c.id) === -1);
 
   const extract = c => c.title;
